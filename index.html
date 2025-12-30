@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Colapso: Sobrevivência Urbana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap');
+      
+      :root {
+        --color-bg: #09090b;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--color-bg);
+        color: #e4e4e7;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overscroll-behavior: none; /* Previne bounce no mobile */
+      }
+
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      /* Otimização de Performance: GPU Layers */
+      .gpu-accelerated {
+        transform: translateZ(0);
+        will-change: opacity;
+        backface-visibility: hidden;
+        pointer-events: none;
+      }
+
+      /* Scanlines Otimizadas */
+      .scanlines {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.1) 50%,
+          rgba(0,0,0,0.1)
+        );
+        background-size: 100% 4px;
+        z-index: 50;
+        opacity: 0.15; /* Mais sutil para performance e leitura */
+      }
+
+      /* Vignette Otimizada */
+      .vignette {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.6) 100%);
+        z-index: 49;
+      }
+
+      /* Utilitários de Scroll */
+      .scrollbar-thin::-webkit-scrollbar { width: 4px; }
+      .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+      .scrollbar-thin::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
+      
+      /* Mascara de gradiente para textos longos */
+      .mask-image-gradient {
+        mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <div class="scanlines gpu-accelerated"></div>
+    <div class="vignette gpu-accelerated"></div>
+  </body>
+</html>
